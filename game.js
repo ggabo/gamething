@@ -1,3 +1,5 @@
+import { generateMaze, randomMaze } from './funcs/mazegen.js';
+
 class Game {
     constructor(width, height) {
       this.width = width;
@@ -11,10 +13,8 @@ class Game {
     }
   
     generateDungeon() {
-      let map = Array.from({ length: this.height }, () => 
-        Array.from({ length: this.width }, () => Math.random() > 0.4 ? '.' : '#')
-      );
-      return map;
+      return randomMaze(this.width, this.height);
+      //return generateMaze(this.width, this.height);
     }
   
     draw() {
@@ -35,7 +35,7 @@ class Game {
       if (newX < 0 || newX >= this.width || newY < 0 || newY >= this.height) {
         return;
       }
-      
+
       if (this.map[newY][newX] === '.') {
         this.player.x = newX;
         this.player.y = newY;
@@ -62,6 +62,6 @@ class Game {
   }
   
   document.addEventListener('DOMContentLoaded', () => {
-    const game = new Game(20, 10);
+    const game = new Game(40, 30);
   });
   
